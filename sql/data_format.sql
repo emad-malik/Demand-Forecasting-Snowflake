@@ -1,0 +1,16 @@
+USE SCHEMA m5_forecasting.raw;
+
+CREATE OR REPLACE FILE FORMAT csv_parsing_format
+    TYPE = 'CSV'
+    FIELD_DELIMITER = ','
+    SKIP_HEADER = 1
+    FIELD_OPTIONALLY_ENCLOSED_BY = '"'
+    NULL_IF = ('', 'NULL');
+
+CREATE OR REPLACE FILE FORMAT csv_infer_format
+  TYPE = 'CSV'
+  PARSE_HEADER = TRUE
+  FIELD_OPTIONALLY_ENCLOSED_BY = '"';
+
+CREATE OR REPLACE STAGE m5_uploads
+    FILE_FORMAT = csv_parsing_format;
